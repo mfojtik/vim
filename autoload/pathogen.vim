@@ -1,0 +1,1 @@
+/home/mfojtik/.vim/bundle/vim-pathogen/autoload/pathogen.vim
