@@ -30,6 +30,9 @@ set formatoptions=tcqron
 
 au Filetype ruby,c,python,bash,perl set cindent autoindent number
 
+au BufRead,BufNewFile *.ru set filetype=ruby
+au BufRead,BufNewFile Gemfile* set filetype=ruby
+
 " With this you can do 'gf' in Normal mode to jump in Ruby classes within
 " current application
 set suffixesadd=.rb
@@ -57,14 +60,6 @@ set ic
 " Highlight search
 set hls showmatch
 
-" I want to avoid tabs and stick to 2 spaces indentation
-set expandtab
-set smarttab
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-autocmd FileType python set expandtab! " Python don't like expandtab too much ;-)
-
 " For some old nostalgy I want to follow the 80 characters per line standard
 set textwidth=80
 
@@ -72,9 +67,9 @@ set textwidth=80
 set visualbell
 
 " Sometime is better to use fold :-)
-set foldmethod=indent " fold based on indent
-set foldnestmax=3 " deepest fold is 3 levels
-set nofoldenable " dont fold by default
+"set foldmethod=indent " fold based on indent
+"set foldnestmax=3 " deepest fold is 3 levels
+"set nofoldenable " dont fold by default
 
 " I like smart menus with files when opening something
 set wildmenu
@@ -104,48 +99,48 @@ set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 autocmd filetype html,xml set listchars-=tab:>.
 
-if has("balloon_eval") && has("unix")
-  set ballooneval
-endif
-
 let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
 let g:NERDShutUp = 1
 let g:NERDTreeHijackNetrw = 0
+let NERDTreeIgnore = ['\.pyc$']
 
 map <leader>d :NERDTreeToggle<CR>
 
 if has("gui")
   set noantialias
-  set lines=52
-  set columns=180
   set guioptions=aevAi
   set guioptions-=Ll
+  " Shift+Insert
+  map  <silent>  <S-Insert>  "+p
+  imap <silent>  <S-Insert>  <Esc>"+pa
 else
-  set background=dark
-  colorscheme solarized
-  hi Normal ctermbg=black
+  "set background=dark
+  "colorscheme solarized
+  "hi Normal ctermbg=black
 endif
 
 if has("gui_macvim")
-  set transparency=0
-  "set guifont=Monaco:h11
-  "set guifont=Pragmata\ TT:h13
   set guifont=Envy\ Code\ R:h13
-  set linespace=1
-  set background=light
   set nolazyredraw
+  set nomousehide
+  set novisualbell
+  set background=dark
   let g:solarized_contrast='high'
   colorscheme solarized
 endif
 
-if g:colors_name == "railscasts"
-  highlight LineNr guifg=#aaaaaa guibg=#242424
-  highlight VertSplit guibg=#888888
-  highlight StatusLineNC guibg=#888888
-endif
-
-let g:pasta_disabled_filetypes = ['python', 'coffee', 'yaml']
+if has("gui_gtk2")
+  set background=dark
+  let g:solarized_contrast='high'
+  colorscheme solarized
+  "set guifont=Envy\ Code\ R\ 10
+  "set guifont=Envy\ Code\ R\ for\ Powerline\ 10
+  set guifont=DejaVu\ Sans\ Mono\ 9
+  set nomousehide
+  set novisualbell
+  set nolazyredraw
+end
 
 noremap <D-1> 1gt
 noremap <D-2> 2gt
@@ -159,3 +154,16 @@ noremap <D-9> 9gt
 noremap <D-9> 10gt
 noremap <D-S-right> gt
 noremap <D-S-left> gT
+
+set t_Co=16
+
+let g:Powerline_symbols = 'fancy'
+
+" experimental
+set backspace=indent,eol,start " more powerful backspacing
+set listchars=tab:>.,trail:-,extends:>,precedes:<
+set nolazyredraw
+
+let g:syntastic_ruby_checker='mri'
+let g:syntastic_ruby_exec='/usr/bin/ruby'
+let g:syntastic_haml_exec='/usr/bin/haml'

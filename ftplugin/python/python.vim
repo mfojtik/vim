@@ -8,4 +8,7 @@ set softtabstop=4
 set shiftwidth=4
 set autoindent
 
+set wildignore+=*.pyc
+let NERDTreeIgnore = ['\.pyc$']
+
 filetype indent on
