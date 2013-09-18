@@ -57,6 +57,14 @@ set grepformat=%f:%l:%m
 " Case insensitive search
 set ic
 
+" Indentation defaults to Ruby, so for other languages you need to change it
+
+set expandtab
+set smarttab
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+
 " Highlight search
 set hls showmatch
 
@@ -164,6 +172,5 @@ set backspace=indent,eol,start " more powerful backspacing
 set listchars=tab:>.,trail:-,extends:>,precedes:<
 set nolazyredraw
 
-let g:syntastic_ruby_checker='mri'
 let g:syntastic_ruby_exec='/usr/bin/ruby'
 let g:syntastic_haml_exec='/usr/bin/haml'
