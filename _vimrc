@@ -33,6 +33,7 @@ au Filetype ruby,c,python,bash,perl set cindent autoindent number
 au BufRead,BufNewFile *.ru set filetype=ruby
 au BufRead,BufNewFile Gemfile* set filetype=ruby
 
+
 " With this you can do 'gf' in Normal mode to jump in Ruby classes within
 " current application
 set suffixesadd=.rb
@@ -174,3 +175,7 @@ set nolazyredraw
 
 let g:syntastic_ruby_exec='/usr/bin/ruby'
 let g:syntastic_haml_exec='/usr/bin/haml'
+
+au Filetype eruby,erb,html,xml,xsl source ~/.vim/plugin/closetag.vim
+inoremap <C-]> <C-R>=GetCloseTag()<CR><Esc>bba
+
